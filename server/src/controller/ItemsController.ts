@@ -9,7 +9,7 @@ class ItemsController {
             return {
                 id: element.id,
                 name: element.title,
-                imageUrl: `http://localhost:3333/uploads/${element.image}`
+                imageUrl: `http://192.168.0.106:3333/uploads/${element.image}`
             }
         });
 
