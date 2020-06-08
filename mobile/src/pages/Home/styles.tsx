@@ -30,7 +30,20 @@ const styles = StyleSheet.create({
 
   footer: {},
 
-  select: {},
+  select: {
+    height: 60,
+    borderRadius: 10,
+    backgroundColor: 'rgba(52, 203, 121, 0.8)',
+    color: '#FFF',
+    paddingHorizontal: 4,
+    fontSize: 16,
+  },
+
+  selectView: {
+    borderRadius: 10,
+    marginTop: 30,
+    overflow: 'hidden'
+  },
 
   input: {
     height: 60,
