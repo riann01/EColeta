@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { Feather as Icon } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import MapView, { Marker } from 'react-native-maps';
 import { SvgUri } from 'react-native-svg';
 import * as Location from 'expo-location';
 import api from '../../services/api';
 import styles from './styles';
+
+interface Params {
+    id: string,
+    nome: string,
+    acronymUf: string
+}
 
 interface Item {
     id: number,
@@ -29,10 +35,14 @@ export default function Points() {
     const [selectedItems, setSelectedItems] = useState<number[]>([]);
     const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0]);
     const [points, setPoints] = useState<Point[]>([]);
+    const [data, setData] = useState({} as Params);
 
     const navigation = useNavigation();
+    const route = useRoute();
 
     useEffect(() => {
+        setData(route.params as Params);
+        console.log(data);
         api.get('items')
             .then((response) => {
                 setItems(response.data);
@@ -47,7 +57,7 @@ export default function Points() {
             const { status } = await Location.requestPermissionsAsync();
 
             if (status != 'granted') {
-                Alert.alert('Atenção', 'É preciso acesso à sua localização para usar esse app.');
+                Alert.alert('Atenção', 'É preciso acesso à sua localização para usar esse o eColeta.');
                 return;
             }
 
@@ -62,8 +72,8 @@ export default function Points() {
         if(selectedItems.length !== 0) {
             api.get('points', {
                 params: {
-                    city: 'Brasília',
-                    uf: 'DF',
+                    city: data.nome,
+                    uf: data.acronymUf,
                     items: selectedItems
                 }
             })

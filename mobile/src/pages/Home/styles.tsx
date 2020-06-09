@@ -33,14 +33,19 @@ const styles = StyleSheet.create({
   select: {
     height: 60,
     borderRadius: 10,
-    backgroundColor: 'rgba(52, 203, 121, 0.8)',
-    color: '#FFF',
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    color: '#322153',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    
     paddingHorizontal: 4,
     fontSize: 16,
   },
 
   selectView: {
     borderRadius: 10,
+    borderWidth: 3,
+    borderColor: 'rgb(52, 203, 121)',
     marginTop: 30,
     overflow: 'hidden'
   },
@@ -69,7 +74,9 @@ const styles = StyleSheet.create({
     width: 60,
     backgroundColor: 'rgba(0, 0, 0, 0.1)',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
   },
 
   buttonText: {

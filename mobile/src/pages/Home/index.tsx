@@ -15,11 +15,6 @@ interface Uf {
     nome: string
 }
 
-interface Refact {
-    label: string,
-    value: string
-}
-
 interface City {
     id: number,
     nome: string
@@ -34,8 +29,19 @@ export default function Home() {
 
     const navigation = useNavigation();
 
-    const handleNavigationToPoints = () => {
-        navigation.navigate('Points');
+    const handleNavigationToPoints = (cityId: string) => {
+        if(cityId === '0') {
+            return;
+        }
+        const cityIndex = cities.findIndex(value => String(value.id) === cityId);
+        
+        const city = cities[cityIndex];
+
+        const ufIndex = ufs.findIndex(value => String(value.id) === selectedUf);
+
+        const uf = ufs[ufIndex];
+
+        navigation.navigate('Points', { id: city.id, nome: city.nome, acronymUf: uf.sigla });
     }
 
     useEffect(() => {
@@ -106,7 +112,7 @@ export default function Home() {
                 </View>
             </View>
             <View style={styles.footer}>
-                <RectButton style={styles.button} onPress={handleNavigationToPoints}>
+                <RectButton style={styles.button} onPress={() => handleNavigationToPoints(selectedCity)}>
                     <View style={styles.buttonIcon}>
                         <Icon name="arrow-right" color="#FFFFFF" size={24}/>
                     </View>
